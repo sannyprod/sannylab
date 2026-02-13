@@ -32,6 +32,20 @@ $(document).on('click', 'a[href^="#"]', function (e) {
 });
 
 $(document).ready(function () {
+    $('.lazy-image').each(function () {
+        const $img = $(this);
+        const fullImage = new Image();
+
+        fullImage.src = $img.data('full');
+
+        fullImage.onload = function () {
+            $img
+                .attr('src', fullImage.src)
+                .removeClass('blurred')
+                .addClass('loaded');
+        };
+    });
+
     // Инициализация всех каруселей на странице
     $('.carousel-wrapper').each(function () {
         initCarousel($(this));

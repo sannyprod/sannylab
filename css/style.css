@@ -128,6 +128,15 @@ a {
   z-index: -2;
   object-fit: cover;
   pointer-events: none;
+  transition: filter 0.5s ease;
+}
+
+.blurred {
+  filter: blur(10px);
+}
+
+.loaded {
+  filter: blur(0px);
 }
 
 /* Полупрозрачный слой для контраста */
