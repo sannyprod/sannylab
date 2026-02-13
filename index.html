@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Photo Studio | Создание фотореалистичных образов с помощью ИИ</title>
+    <meta name="description"
+        content="Создаем уникальные изображения с помощью современных генеративных моделей и постобработки." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">✨ SannyLab - AI Photo Studio</a>
+            <ul class="nav-links">
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contact" class="btn nav-btn">Связаться</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero-секция -->
+    <section class="hero">
+        <img src="images/banner_wide_medium.png" alt="" class="hero-bg" onerror="this.style.display='none'">
+
+        <div class="container">
+            <h1 class="title">ИИ-фотосессии</h1>
+            <p class="sub-title">Мы помогаем людям побывать на фотосессии не выходя из дома. Вы хотите несколько
+                красивых снимков из фотостудии, но не хотите идти на полноценную фотосессию? Или, может быть вы хотите
+                удивить друзей фотографиями с шикарного отпуска в Дубае, или на Мальдивах? А может вам нужна фотосессия
+                с праздника? Свяжитесь с нами, и мы поможем воплотить вашу идею в жизнь!</p>
+
+            <!-- <div class="hero-sub">
+                <span>🎨 AI-арт</span>
+                <span>🖼️ Фотомонтаж</span>
+                <span>🔧 Ретушь + Визуализация</span>
+            </div> -->
+
+            <a href="#portfolio" class="btn">Смотреть портфолио</a>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Что мы предлагаем?</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="icon">📷</span>
+                    <h3>Фотореалистичные портреты</h3>
+                    <p>Лица, одеваем в любые стили (стилистика, национальный костюм, фэнтези и др.) — с детализацией
+                        кожи, волос, глаз.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">🤖</span>
+                    <h3>Особая стилизация</h3>
+                    <p>Стилизация фото под мультипликацию, игру, фантастику — почувствуйте себя героем собственной
+                        истории.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">🎨</span>
+                    <h3>Цветокоррекция и пост-обработка</h3>
+                    <p>После генерации: баланс белого, контраста, изменение освещения — чтобы выглядело не как «ИИ», а
+                        как прфессиональное фото.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section id="portfolio" class="photography-portfolio services">
+        <div class="container">
+            <h2 class="section-title">Портфолио</h2>
+
+            <!-- Блок: Отпуск / Пейзажи -->
+            <article class="portfolio-category" data-theme="отпуск">
+                <header>
+                    <h3>🌴 Отпуск</h3>
+                    <p>Незабываемые моменты за пределами рутины.</p>
+                </header>
+
+                <!-- Карусель -->
+                <div class="carousel-wrapper">
+                    <button class="carousel-btn prev" aria-label="Предыдущий слайд">❮</button>
+
+                    <div class="carousel-viewport">
+                        <div class="carousel-track">
+                            <img src="images/vacation/vacation_1.png" alt="Горная тропа" />
+                            <img src="images/vacation/vacation_2.png" alt="Горная тропа" />
+                            <img src="images/vacation/vacation_3.png" alt="Горная тропа" />
+                            <img src="images/vacation/vacation_4.png" alt="Горная тропа" />
+                            <img src="images/vacation/vacation_5.png" alt="Горная тропа" />
+                            <img src="images/vacation/vacation_6.png" alt="Горная тропа" />
+                        </div>
+                    </div>
+
+                    <button class="carousel-btn next" aria-label="Следующий слайд">❯</button>
+                </div>
+            </article>
+
+            <!-- Блок: Праздники -->
+            <article class="portfolio-category" data-theme="праздники">
+                <header>
+                    <h3>🎉 Праздники и события</h3>
+                    <p>Эмоции, улыбки — всё самое яркое в жизни людей.</p>
+                </header>
+
+                <div class="carousel-wrapper">
+                    <button class="carousel-btn prev">❮</button>
+                    <div class="carousel-viewport">
+                        <div class="carousel-track">
+                            <img src="images/banner_medium.png" alt="Свадьба под дождем" />
+                            <img src="images/banner_medium.png" alt="Новогодний бал" />
+                            <img src="images/banner_medium.png" alt="Детский день рождения" />
+                            <img src="images/banner_medium.png" alt="Концерт на свежем воздухе" />
+                            <img src="images/banner_medium.png" alt="Свадьба под дождем" />
+                        </div>
+                    </div>
+                    <button class="carousel-btn next">❯</button>
+                </div>
+            </article>
+
+            <!-- Блок: Тренды / Уличная фоторафия -->
+            <article class="portfolio-category" data-theme="тренды">
+                <header>
+                    <h3>📸 Тренды</h3>
+                    <p>Актуальные и популярные идеи для инстаграмма.</p>
+                </header>
+
+                <div class="carousel-wrapper">
+                    <button class="carousel-btn prev">❮</button>
+                    <div class="carousel-viewport">
+                        <div class="carousel-track">
+                            <img src="images/trends/trends_scream.png" alt="ИИ тренд крик" />
+                            <img src="images/trends/trends_zootopia.png" alt="ИИ тренд Зверополис" />
+                            <img src="images/trends/trends_model_man.png" alt="ИИ тренд модель мужчина" />
+                            <img src="images/trends/trends_model_woman.png" alt="ИИ тренд модель женщина" />
+                            <img src="images/trends/trends_cartoon.png" alt="ИИ тренд мельтяшка" />
+                            <img src="images/trends/trends_cosplay_lara.png" alt="ИИ тренд косплей" />
+                            <img src="images/trends/trends_cyberpunk.png" alt="ИИ тренд киберпанк" />
+                            <img src="images/trends/trends_game.png" alt="ИИ тренд игровой персонаж" />
+                            <img src="images/trends/trends_drawning_style.png" alt="ИИ тренд рисунок карандашом" />
+                        </div>
+                    </div>
+                    <button class="carousel-btn next">❯</button>
+                </div>
+            </article>
+
+            <!-- Блок: Студийное фото -->
+            <article class="portfolio-category" data-theme="студия">
+                <header>
+                    <h3>📷 Студийная съемка</h3>
+                    <p>Чистый свет, идеальная композиция и проработанные детали.</p>
+                </header>
+
+                <div class="carousel-wrapper">
+
+                    <button class="carousel-btn prev">❮</button>
+                    <div class="carousel-viewport">
+                        <div class="carousel-track">
+                            <img src="images/studio/studio_1.png" alt="Женский портрет в студии" />
+                            <img src="images/studio/studio_2.png" alt="Мужской портрет в студии" />
+                            <img src="images/studio/studio_3.png" alt="Мужской портрет в студии классический" />
+                            <img src="images/studio/studio_4.png" alt="Женский портрет в студии чб" />
+                            <img src="images/studio/studio_5.png" alt="Женский студийный коллаж" />
+                            <img src="images/studio/studio_6.png" alt="Женский портрет в костюме" />
+                            <img src="images/studio/studio_7.png" alt="Женский портрет на диване" />
+                            <img src="images/studio/studio_8.png" alt="Женский портрет в кресле" />
+                            <img src="images/studio/studio_9.png" alt="Мужской портрет задумчивый" />
+                        </div>
+                    </div>
+                    <button class="carousel-btn next">❯</button>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Об авторе -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Мы — ИИ фотостудия</h2>
+                    <p>Мы не просто нажимаем кнопку «Gen». Мы — <strong>операторы и режиссёры
+                            генеративного процесса</strong>.</p>
+                    <ul class="about-list">
+                        <li><strong>Опыт:</strong> более 1 года в digital-креации</li>
+                        <li><strong>Модели:</strong> Flux 2, QWEN Edit, Nano Banana, SeedVR2 и другие</li>
+                    </ul>
+                    <p class="about-note">Важно: любые ИИ модели имеют погрешность в сохранении идентичности лица
+                        оригинала, но мы стремимся к максимальному сохранению сходства с оригиналом.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact services">
+        <div class="container contact-card">
+            <h2>Как начать работу?</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Ваше имя" required maxlength="64" />
+                <input type="email" placeholder="Email" required maxlength="64" />
+                <textarea placeholder="Опишите задумку (стиль, настроение, параметры)..." rows="4" required
+                    maxlength="1024"></textarea>
+                <button type="submit" class="btn">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer services">
+        <div class="container">
+            <p>Дисклеймер: Используемые на сайте люди являются продуктом генерации ИИ*</p>
+            <p>© 2026 SannyLab | Создано с любовью к нейросетям 🤖📸</p>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption" class="modal-caption"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
