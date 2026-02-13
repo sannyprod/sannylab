@@ -177,7 +177,7 @@ $(document).ready(function () {
     $(document).on('click', '.carousel-track img', function () {
         const $clickedImage = $(this);
         const $carousel = $clickedImage.closest('.carousel-wrapper');
-
+        console.log($carousel)
         // Берём только оригинальные изображения (без клонов)
         currentImages = $carousel.find('.carousel-track img').not('.cloned').toArray();
 
@@ -217,10 +217,10 @@ $(document).ready(function () {
 
         if (isMobile) {
             if (e.target === this && !isSwiping) {
-                $(this).hide();
+                $(this).removeClass('active');
             }
         } else {
-            $(this).hide();
+            $(this).removeClass('active');
         }
     });
 
