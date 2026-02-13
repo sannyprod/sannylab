@@ -1,3 +1,6 @@
+let currentImages = [];
+let currentIndex = 0;
+
 document.addEventListener('click', e => {
     if (!e.target.classList.contains('filter-btn')) return;
 
@@ -32,19 +35,44 @@ $(document).on('click', 'a[href^="#"]', function (e) {
 });
 
 $(document).ready(function () {
-    $('.lazy-image').each(function () {
-        const $img = $(this);
-        const fullImage = new Image();
+    // $('.lazy-image').each(function () {
+    //     const $img = $(this);
+    //     const fullImage = new Image();
 
-        fullImage.src = $img.data('full');
+    //     fullImage.src = $img.data('full');
 
-        fullImage.onload = function () {
-            $img
-                .attr('src', fullImage.src)
-                .removeClass('blurred')
-                .addClass('loaded');
-        };
-    });
+    //     fullImage.onload = function () {
+    //         $img
+    //             .attr('src', fullImage.src)
+    //             .removeClass('blurred')
+    //             .addClass('loaded');
+    //     };
+    // });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50;
+    let isSwiping = false;
+
+    function initLazyImages(context = document) {
+        $(context).find('.lazy-image').each(function () {
+
+            const $img = $(this);
+
+            // если уже загружено — пропускаем
+            if ($img.hasClass('loaded')) return;
+
+            const fullImage = new Image();
+            fullImage.src = $img.data('full');
+
+            fullImage.onload = function () {
+                $img
+                    .attr('src', fullImage.src)
+                    .removeClass('blurred')
+                    .addClass('loaded');
+            };
+        });
+    }
 
     // Инициализация всех каруселей на странице
     $('.carousel-wrapper').each(function () {
@@ -72,6 +100,7 @@ $(document).ready(function () {
 
         $track.prepend($lastClones);
         $track.append($firstClones);
+        initLazyImages($track);
 
         let totalSlides = $track.children().length;
         let currentIndex = visibleSlides;
@@ -106,7 +135,7 @@ $(document).ready(function () {
 
             if (currentIndex < visibleSlides) {
                 setTimeout(() => {
-                    currentIndex = totalSlides - visibleSlides * 2;
+                    currentIndex = visibleSlides + (totalSlides - visibleSlides * 2) - 1;
                     updatePosition(false);
                 }, 500);
             }
@@ -134,17 +163,52 @@ $(document).ready(function () {
     const $modalImg = $('#modal-img');
     const $caption = $('#caption');
 
+    function openModal() {
+        if (!currentImages.length) return;
+
+        const img = currentImages[currentIndex];
+
+        $modal.addClass('active');
+        $modalImg.attr('src', img.src);
+        $caption.text(img.alt || "Фотография из портфолио");
+    }
+
     // Открыть модалку при клике на фото внутри каруселей
     $(document).on('click', '.carousel-track img', function () {
-        if (!$modal.length) return; // защита, если нет модалки
-        $modal.show();
-        $modalImg.attr('src', this.src);
-        $caption.text(this.alt || "Фотография из портфолио");
+        const $clickedImage = $(this);
+        const $carousel = $clickedImage.closest('.carousel-wrapper');
+
+        // Берём только оригинальные изображения (без клонов)
+        currentImages = $carousel.find('.carousel-track img').not('.cloned').toArray();
+
+        currentIndex = currentImages.indexOf(this);
+
+        openModal();
+    });
+
+    function showNext() {
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        openModal();
+    }
+
+    function showPrev() {
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+        openModal();
+    }
+
+    $('.modal-next').on('click', function (e) {
+        e.stopPropagation();
+        showNext();
+    });
+
+    $('.modal-prev').on('click', function (e) {
+        e.stopPropagation();
+        showPrev();
     });
 
     // Закрыть при клике на крестик
     $('.close').on('click', function () {
-        $modal.hide();
+        $modal.removeClass('active');
     });
 
     // Закрыть при клике в любом месте модалки (кроме картинки)
@@ -152,7 +216,7 @@ $(document).ready(function () {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
         if (isMobile) {
-            if (e.target === this) {
+            if (e.target === this && !isSwiping) {
                 $(this).hide();
             }
         } else {
@@ -162,8 +226,48 @@ $(document).ready(function () {
 
     // Закрытие по Escape
     $(document).on('keydown', function (e) {
-        if (e.key === 'Escape' && $modal.is(':visible')) {
-            $modal.hide();
+        if (!$modal.is(':visible')) return;
+
+        if (e.key === 'Escape') {
+            $modal.removeClass('active');
+        }
+
+        if (e.key === 'ArrowRight') {
+            showNext();
+        }
+
+        if (e.key === 'ArrowLeft') {
+            showPrev();
         }
     });
+
+    // Свайп для мобильных
+    $modal.on('touchstart', function (e) {
+        touchStartX = e.originalEvent.touches[0].clientX;
+    });
+
+    $modal.on('touchend', function (e) {
+        touchEndX = e.originalEvent.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) < swipeThreshold) return;
+
+        isSwiping = true;
+
+        if (diff > 0) {
+            showNext();
+        } else {
+            showPrev();
+        }
+
+        setTimeout(() => {
+            isSwiping = false;
+        }, 300);
+    }
+
+    initLazyImages();
 });
