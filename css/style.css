@@ -533,6 +533,8 @@ footer a:hover {
 
 /* Блок категории */
 .portfolio-category {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 90px;
 }
 
@@ -541,59 +543,74 @@ footer a:hover {
 }
 
 /* Обертка карусели */
-.carousel-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.slider3d {
   position: relative;
+  width: 420px;
+  user-select: none;
+  align-self: center;
 }
 
-.carousel-viewport {
-  overflow: hidden;
+.viewport {
+  perspective: 1200px;
+  overflow: visible;
+  height: 240px;
+}
+
+.viewport:active {
+  cursor: grabbing;
+}
+
+.track {
+  position: relative;
   width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
 }
 
-.carousel-track {
-  display: flex;
-  gap: 8px;
-  transition: transform 0.5s ease;
-  will-change: transform;
-}
-
-.carousel-track img {
-  flex: 0 0 calc((100% - 16px) / 3);
-  object-fit: cover;
-  width: calc((100% - 16px) / 3);
+.slide {
+  position: absolute;
+  max-width: 460px;
+  width: 100%;
   height: auto;
-  display: block;
-  border-radius: 16px;
-  box-shadow: 0 24px 38px -12px rgba(0, 0, 0, 0.12);
-}
-
-.portfolio-category .carousel-track img:hover {
-  transform: scale(1.03);
-}
-
-/* Кнопки карусели */
-.carousel-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: none;
-  color: white;
-  font-size: 28px;
-  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #3b82f6, #9333ea);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-size: 42px;
+  font-weight: bold;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.6s cubic-bezier(.2, .8, .2, 1),
+    filter 0.6s,
+    opacity 0.6s;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.carousel-btn:hover {
-  background-color: #e5e7eb;
-  transform: translateY(-2px);
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 28px;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.prev {
+  left: -55px;
+}
+
+.next {
+  right: -55px;
+}
+
+.nav:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 /* Адаптивность карусели */
@@ -615,7 +632,6 @@ footer a:hover {
     font-size: 22px;
   }
 
-  /* На мобильных — только 1 изображение одновременно */
   .portfolio-category .carousel-track img {
     min-width: 100%;
     max-width: 100%;
@@ -624,8 +640,6 @@ footer a:hover {
 }
 
 @media (max-width: 480px) {
-
-  /* Скрыть кнопки на очень маленьких экранах */
   .portfolio-category .carousel-track img {
     min-width: 100%;
   }
