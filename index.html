@@ -4,22 +4,31 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Photo Studio | Создание фотореалистичных образов с помощью ИИ</title>
+    <title>AI Photo Studio | Фотореалистичные ИИ фотографии и портреты</title>
     <meta name="description"
-        content="Создаем уникальные изображения с помощью современных генеративных моделей и постобработки." />
+        content="SannyLab AI Photo Studio — создаем уникальные фотореалистичные изображения и портреты с помощью ИИ. Индивидуальная стилизация, постобработка и фотосессии онлайн." />
+    <meta name="keywords"
+        content="ИИ фотостудия, фотореалистичные портреты, AI фотографии, генеративные модели, онлайн фотосессия" />
+    <link rel="canonical" href="https://sannylab.ai/" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Inter:wght@300;400&display=swap"
         rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
 
     <!-- Навигация -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Главное меню">
         <div class="container">
             <a href="#" class="logo">✨ SannyLab - AI Photo Studio</a>
             <ul class="nav-links">
@@ -33,22 +42,15 @@
 
     <!-- Hero-секция -->
     <section class="hero">
-        <img src="images/banner_wide_ultralow.png" data-full="images/banner_wide_medium.png" alt="Заходите мы открыты"
-            class="hero-bg blurred lazy-image" onerror="this.style.display='none'">
+        <img src="images/banner_wide_ultralow.png" data-full="images/banner_wide_medium.png"
+            alt="Фотореалистичная ИИ фотосессия" class="hero-bg blurred lazy-image" onerror="this.style.display='none'">
 
         <div class="container">
-            <h1 class="title">ИИ-фотосессии</h1>
-            <p class="sub-title">Мы помогаем людям побывать на фотосессии не выходя из дома. Вы хотите несколько
-                красивых снимков из фотостудии, но не хотите идти на полноценную фотосессию? Или, может быть вы хотите
-                удивить друзей фотографиями с шикарного отпуска в Дубае, или на Мальдивах? А может вам нужна фотосессия
-                с праздника? Свяжитесь с нами, и мы поможем воплотить вашу идею в жизнь!</p>
-
-            <!-- <div class="hero-sub">
-                <span>🎨 AI-арт</span>
-                <span>🖼️ Фотомонтаж</span>
-                <span>🔧 Ретушь + Визуализация</span>
-            </div> -->
-
+            <h1 class="title">ИИ-фотосессии онлайн</h1>
+            <p class="sub-title">
+                Мы создаем фотореалистичные изображения прямо из дома. Хотите профессиональные портреты, студийные
+                съемки или фото с отпуска? Мы реализуем любые идеи с помощью ИИ.
+            </p>
             <a href="#portfolio" class="btn">Смотреть портфолио</a>
         </div>
     </section>
@@ -56,25 +58,23 @@
     <!-- Услуги -->
     <section id="services" class="services">
         <div class="container">
-            <h2>Что мы предлагаем?</h2>
+            <h2>Наши услуги</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <span class="icon">📷</span>
                     <h3>Фотореалистичные портреты</h3>
-                    <p>Лица, одеваем в любые стили (стилистика, национальный костюм, фэнтези и др.) — с детализацией
-                        кожи, волос, глаз.</p>
+                    <p>Создаем лица в любых стилях — классика, национальные костюмы, фэнтези — с высокой детализацией
+                        кожи, волос и глаз.</p>
                 </div>
                 <div class="service-card">
                     <span class="icon">🤖</span>
                     <h3>Особая стилизация</h3>
-                    <p>Стилизация фото под мультипликацию, игру, фантастику — почувствуйте себя героем собственной
-                        истории.</p>
+                    <p>Фото под мультипликацию, игры, фантастику — почувствуйте себя героем своей истории с ИИ.</p>
                 </div>
                 <div class="service-card">
                     <span class="icon">🎨</span>
-                    <h3>Цветокоррекция и пост-обработка</h3>
-                    <p>После генерации: баланс белого, контраста, изменение освещения — чтобы выглядело не как «ИИ», а
-                        как прфессиональное фото.</p>
+                    <h3>Цветокоррекция и постобработка</h3>
+                    <p>Коррекция белого, контраст, свет — фото выглядят профессионально и естественно.</p>
                 </div>
             </div>
         </div>
@@ -83,42 +83,37 @@
     <!-- Портфолио -->
     <section id="portfolio" class="photography-portfolio services">
         <div class="container">
-            <h2 class="section-title">Портфолио</h2>
+            <h2 class="section-title">Портфолио ИИ-фотосессий</h2>
 
-            <!-- Блок: Отпуск / Пейзажи -->
+            <!-- Категории -->
             <article class="portfolio-category" data-theme="отпуск">
                 <header>
                     <h3>🌴 Отпуск</h3>
-                    <p>Незабываемые моменты за пределами рутины.</p>
+                    <p>Незабываемые моменты и пейзажи, созданные с помощью ИИ.</p>
                 </header>
-
-                <!-- Карусель -->
                 <div class="slider3d">
                     <button class="nav prev" aria-label="Предыдущий слайд">❮</button>
-
                     <div class="viewport">
                         <div class="track">
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1.png" class="slide blurred lazy-image"
-                                alt="Пара на пляже" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1.png" class="slide blurred lazy-image"
-                                alt="Пара с коктейлями" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1.png" class="slide blurred lazy-image"
-                                alt="Колесо обозрения платье" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1.png" class="slide blurred lazy-image"
-                                alt="Колесо обозрения" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1.png" class="slide blurred lazy-image"
-                                alt="Океаническое счастье" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1.png" class="slide blurred lazy-image"
-                                alt="Девушка на яхте" />
+                            <img src="images/vacation/pair_on_the_beach_low.png"
+                                data-full="images/vacation/pair_on_the_beach.png" alt="Фотореалистичная пара на пляже"
+                                class="slide blurred lazy-image" draggable="false">
+                            <img src="images/vacation/woman_on_a_yacht_low.png"
+                                data-full="images/vacation/woman_on_a_yacht.png" alt="Пара с коктейлями на пляже"
+                                class="slide blurred lazy-image" draggable="false">
+                            <img src="images/vacation/ferris_wheel_low.png" data-full="images/vacation/ferris_wheel.png"
+                                alt="Колесо обозрения на отдыхе" class="slide blurred lazy-image" draggable="false">
+                            <img src="images/vacation/pair_with_cocktails_low.png"
+                                data-full="images/vacation/pair_with_cocktails.png" alt="Океаническое счастье на закате"
+                                class="slide blurred lazy-image" draggable="false">
+                            <img src="images/vacation/woman_on_a_snowboard_low.png"
+                                data-full="images/vacation/woman_on_a_snowboard.png" alt="Девушка на яхте в отпуске"
+                                class="slide blurred lazy-image" draggable="false">
+                            <img src="images/vacation/woman_on_a_ski_lift_low.png"
+                                data-full="images/vacation/woman_on_a_ski_lift.png" alt="Девушка на яхте в отпуске"
+                                class="slide blurred lazy-image" draggable="false">
                         </div>
                     </div>
-
                     <button class="nav next" aria-label="Следующий слайд">❯</button>
                 </div>
             </article>
@@ -134,23 +129,23 @@
                     <button class="nav prev">❮</button>
                     <div class="viewport">
                         <div class="track">
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/holidays/birthday_low.png" draggable="false"
+                                data-full="images/holidays/birthday.png" class="slide blurred lazy-image"
                                 alt="Свадьба под дождем" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/holidays/child_birthday_low.png" draggable="false"
+                                data-full="images/holidays/child_birthday.png" class="slide blurred lazy-image"
                                 alt="Новогодний бал" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/holidays/valentines_day_low.png" draggable="false"
+                                data-full="images/holidays/valentines_day.png" class="slide blurred lazy-image"
                                 alt="Детский день рождения" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/holidays/new_year_low.png" draggable="false"
+                                data-full="images/holidays/new_year.png" class="slide blurred lazy-image"
                                 alt="Концерт на свежем воздухе" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/holidays/wedding_day_low.png" draggable="false"
+                                data-full="images/holidays/wedding_day.png" class="slide blurred lazy-image"
                                 alt="Свадьба под дождем" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/holidays/halloween_low.png" draggable="false"
+                                data-full="images/holidays/halloween.png" class="slide blurred lazy-image"
                                 alt="Свадьба под дождем" />
                         </div>
                     </div>
@@ -169,23 +164,23 @@
                     <button class="nav prev">❮</button>
                     <div class="viewport">
                         <div class="track">
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/trends/scream_low.png" draggable="false"
+                                data-full="images/trends/scream.png" class="slide blurred lazy-image"
                                 alt="ИИ тренд крик" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/trends/zootopia_low.png" draggable="false"
+                                data-full="images/trends/zootopia.png" class="slide blurred lazy-image"
                                 alt="ИИ тренд Зверополис" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/trends/cartoon_low.png" draggable="false"
+                                data-full="images/trends/cartoon.png" class="slide blurred lazy-image"
                                 alt="ИИ тренд модель мужчина" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/trends/cyberpunk_low.png" draggable="false"
+                                data-full="images/trends/cyberpunk.png" class="slide blurred lazy-image"
                                 alt="ИИ тренд модель женщина" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/trends/picture_low.png" draggable="false"
+                                data-full="images/trends/picture.png" class="slide blurred lazy-image"
                                 alt="ИИ тренд мельтяшка" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/trends/the_game_low.png" draggable="false"
+                                data-full="images/trends/the_game.png" class="slide blurred lazy-image"
                                 alt="ИИ тренд косплей" />
                         </div>
                     </div>
@@ -205,23 +200,23 @@
                     <button class="nav prev">❮</button>
                     <div class="viewport">
                         <div class="track">
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/studio/rim_light_portrait_low.png" draggable="false"
+                                data-full="images/studio/rim_light_portrait.png" class="slide blurred lazy-image"
                                 alt="Женский портрет в студии" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/studio/artistic_portrait_photo_low.png" draggable="false"
+                                data-full="images/studio/artistic_portrait_photo.png" class="slide blurred lazy-image"
                                 alt="Мужской портрет в студии" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
-                                alt="Мужской портрет в студии классический" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/studio/professional_buisness_photo_low.png" draggable="false"
+                                data-full="images/studio/professional_buisness_photo.png"
+                                class="slide blurred lazy-image" alt="Мужской портрет в студии классический" />
+                            <img src="images/studio/thinking_low.png" draggable="false"
+                                data-full="images/studio/thinking.png" class="slide blurred lazy-image"
                                 alt="Женский портрет в студии чб" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/studio/colage_low.png" draggable="false"
+                                data-full="images/studio/colage.png" class="slide blurred lazy-image"
                                 alt="Женский студийный коллаж" />
-                            <img src="images/vacation/vacation_1_low.png" draggable="false"
-                                data-full="images/vacation/vacation_1_low.png" class="slide blurred lazy-image"
+                            <img src="images/studio/1960s_style_low.png" draggable="false"
+                                data-full="images/studio/1960s_style.png" class="slide blurred lazy-image"
                                 alt="Женский портрет в костюме" />
                         </div>
                     </div>
@@ -237,15 +232,16 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-text">
-                    <h2>Мы — ИИ фотостудия</h2>
-                    <p>Мы не просто нажимаем кнопку «Gen». Мы — <strong>операторы и режиссёры
-                            генеративного процесса</strong>.</p>
+                    <h2>Мы — профессиональная ИИ фотостудия</h2>
+                    <p>Мы не просто нажимаем кнопку «Gen». Мы — <strong>операторы и режиссёры генеративного
+                            процесса</strong>, создающие уникальные фотореалистичные снимки.</p>
                     <ul class="about-list">
-                        <li><strong>Опыт:</strong> более 1 года в digital-креации</li>
+                        <li><strong>Опыт:</strong> более 1 года в digital-креации и ИИ фото</li>
                         <li><strong>Модели:</strong> Flux 2, QWEN Edit, Nano Banana, SeedVR2 и другие</li>
                     </ul>
-                    <p class="about-note">Важно: любые ИИ модели имеют погрешность в сохранении идентичности лица
-                        оригинала, но мы стремимся к максимальному сохранению сходства с оригиналом.
+                    <p class="about-note">
+                        Важно: ИИ модели могут не идеально сохранять идентичность лица, но мы стремимся к максимальному
+                        сходству.
                     </p>
                 </div>
             </div>
@@ -255,8 +251,8 @@
     <!-- Контакты -->
     <section id="contact" class="contact services">
         <div class="container contact-card">
-            <h2>Как начать работу?</h2>
-            <form class="contact-form">
+            <h2>Свяжитесь с нами</h2>
+            <form class="contact-form" aria-label="Форма связи">
                 <input type="text" placeholder="Ваше имя" required maxlength="64" />
                 <input type="email" placeholder="Email" required maxlength="64" />
                 <textarea placeholder="Опишите задумку (стиль, настроение, параметры)..." rows="4" required
@@ -266,21 +262,21 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer services">
         <div class="container">
-            <p>Дисклеймер: Используемые на сайте люди являются продуктом генерации ИИ*</p>
+            <p>Дисклеймер: все персонажи на сайте сгенерированы ИИ*</p>
             <p>© 2026 SannyLab | Создано с любовью к нейросетям 🤖📸</p>
         </div>
     </footer>
 
-    <div id="modal" class="modal">
-        <span class="close">&times;</span>
-
-        <button class="modal-nav modal-prev">❮</button>
-        <button class="modal-nav modal-next">❯</button>
-
+    <!-- Модальное окно -->
+    <div id="modal" class="modal" aria-hidden="true">
+        <span class="close" aria-label="Закрыть">&times;</span>
+        <button class="modal-nav modal-prev" aria-label="Предыдущая фотография">❮</button>
+        <button class="modal-nav modal-next" aria-label="Следующая фотография">❯</button>
         <div class="modal-inner">
-            <img class="modal-content" id="modal-img">
+            <img class="modal-content" id="modal-img" alt="Просмотр изображения">
             <div id="caption" class="modal-caption"></div>
         </div>
     </div>

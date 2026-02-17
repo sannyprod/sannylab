@@ -1,4 +1,6 @@
-/* ——— Базовые настройки ——— */
+/* =======================================================
+   БАЗОВЫЕ НАСТРОЙКИ
+======================================================= */
 * {
   margin: 0;
   padding: 0;
@@ -34,7 +36,9 @@ button {
   padding: 0 24px;
 }
 
-/* ——— Типографика и акценты ——— */
+/* =======================================================
+   ТИПОГРАФИКА И АКЦЕНТЫ
+======================================================= */
 h1, h2, h3 {
   font-family: 'Montserrat', sans-serif;
 }
@@ -71,7 +75,9 @@ a {
   box-shadow: 0 16px 45px rgba(217, 70, 239, 0.28);
 }
 
-/* ——— Навигация ——— */
+/* =======================================================
+   НАВИГАЦИЯ
+======================================================= */
 .navbar {
   position: fixed;
   top: 0;
@@ -108,7 +114,9 @@ a {
   font-size: 0.95rem;
 }
 
-/* ——— Hero-секция ——— */
+/* =======================================================
+   HERO-СЕКЦИЯ
+======================================================= */
 .hero {
   min-height: 90vh;
   position: relative;
@@ -117,29 +125,28 @@ a {
   justify-content: center;
 }
 
-/* Адаптивный фон */
 .hero-bg {
   position: fixed;
   top: 50px;
-  left: 0px;
-  object-position: 52%;
+  left: 0;
   width: 100%;
   height: 100%;
-  z-index: -2;
   object-fit: cover;
+  object-position: 52%;
+  z-index: -2;
   pointer-events: none;
   transition: filter 0.5s ease;
 }
 
 .blurred {
-  filter: blur(10px);
+  outline: none;
+  /* filter: blur(10px); */
 }
 
 .loaded {
   filter: blur(0px);
 }
 
-/* Полупрозрачный слой для контраста */
 .hero::before {
   content: '';
   position: absolute;
@@ -156,7 +163,6 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.5); */
   padding: 2rem;
   border-radius: 24px;
 }
@@ -166,13 +172,18 @@ a {
   margin-bottom: 1rem;
 }
 
-/* ——— Портфолио: разбиение по категориям ——— */
+/* =======================================================
+   ПОРТФОЛИО
+======================================================= */
+
+/* Заголовки категорий */
 .gallery-category-title {
   font-size: clamp(1.3rem, 4vw, 2rem);
   color: white;
   margin-top: 56px;
 }
 
+/* Фильтры */
 .filter-container {
   display: flex;
   justify-content: center;
@@ -180,57 +191,82 @@ a {
   flex-wrap: wrap;
 }
 
-.filters .filter-btn {
+.filters {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.filters .filter-btn,
+.filter-btn {
   background: rgba(255, 255, 255, 0.08);
   color: #b4b7c0;
   padding: 10px 20px;
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
   border: none;
+  transition: all 0.3s ease;
 }
 
-.filters .filter-btn:hover, .filters .filter-btn.active {
+.filters .filter-btn:hover,
+.filters .filter-btn.active,
+.filter-btn:hover,
+.filter-btn.active {
   background: var(--accent);
   color: white;
   transform: translateY(-2px);
 }
 
-/* Скрытие/показ элементов при фильтрации (без JS пока) */
+/* Сетка портфолио */
+.gallery {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
 .gallery-item {
   display: block;
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
   animation: fadeIn 0.6s ease forwards;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Скрытые элементы (используется в JS) */
 .gallery-item.hidden {
   display: none;
   animation: none;
 }
 
-/* Улучшенные карточки портфолио */
 .gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: filter 0.5s ease, transform 0.6s ease;
 }
 
 .gallery-item:hover img {
   filter: brightness(1.08) contrast(1.05);
+  transform: scale(1.08);
 }
 
-/* ——— Услуги и Портфолио ——— */
+.gallery figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92), transparent);
+  padding: 32px 24px;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+}
+
+.gallery figcaption strong {
+  color: var(--accent);
+}
+
+/* =======================================================
+   УСЛУГИ И ОБО СЕКЦИИ
+======================================================= */
 section {
   padding: 40px 0;
 }
@@ -275,68 +311,9 @@ section {
   margin-bottom: 14px;
 }
 
-/* ——— Портфолио: фильтрация и сетка ——— */
-.filters {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.filter-btn {
-  background: transparent;
-  color: #a1a5b0;
-  padding: 8px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  margin: 0 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.filter-btn:hover, .filter-btn.active {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
-}
-
-.gallery {
-  display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.gallery-item {
-  overflow: hidden;
-  border-radius: 20px;
-  position: relative;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.gallery-item:hover img {
-  transform: scale(1.08);
-}
-
-.gallery figcaption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.92), transparent);
-  padding: 32px 24px;
-  font-size: 0.95rem;
-  color: #e5e7eb;
-}
-
-.gallery figcaption strong {
-  color: var(--accent);
-}
-
-/* ——— Контактная форма и footer ——— */
+/* =======================================================
+   КОНТАКТЫ И FOOTER
+======================================================= */
 .contact-card {
   background: linear-gradient(135deg, rgba(217, 70, 239, 0.08), transparent);
   border-radius: 32px;
@@ -385,7 +362,9 @@ footer a:hover {
   color: white;
 }
 
-/* МОДАЛЬНОЕ ОКНО (сверху всех слоев) */
+/* =======================================================
+   МОДАЛЬНОЕ ОКНО
+======================================================= */
 .modal {
   display: none;
   position: fixed;
@@ -451,7 +430,6 @@ footer a:hover {
 .close {
   position: absolute;
   top: 50px;
-  /* Рядом с заголовком */
   right: 35px;
   color: #f7fafc;
   font-size: 40px;
@@ -459,90 +437,15 @@ footer a:hover {
   transition: 0.3s;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: #fff;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* Анимации */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-
-/* ——— Адаптивность ——— */
-@media (max-width: 768px) {
-  .nav-links, .hero-sub, footer a {
-    display: none;
-  }
-
-  .modal-content {
-    animation: none;
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-  }
-
-  .modal-caption {
-    display: none;
-  }
-
-  .close {
-    display: none;
-  }
-}
-
-
-/* Общие стили секции */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.section-subtitle {
-  text-align: center;
-  margin: 0 auto 60px;
-}
-
-/* Блок категории */
-.portfolio-category {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 40px;
-}
-
-.portfolio-category header h3 {
-  margin: 0 0 10px;
-}
-
-/* Обертка карусели */
+/* =======================================================
+   КАРУСЕЛЬ / SLIDER3D
+======================================================= */
 .slider3d {
   position: relative;
   width: 420px;
@@ -590,7 +493,7 @@ footer a:hover {
 
 .nav {
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.1);
   border: none;
@@ -600,21 +503,51 @@ footer a:hover {
   height: 42px;
   cursor: pointer;
   border-radius: 8px;
+  z-index: 99;
 }
 
 .prev {
-  left: -55px;
+  left: -80%;
 }
 
 .next {
-  right: -55px;
+  right: -80%;
 }
 
 .nav:hover {
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* Адаптивность карусели */
+/* =======================================================
+   АНИМАЦИИ
+======================================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* =======================================================
+   АДАПТИВНОСТЬ
+======================================================= */
 @media (max-width: 968px) {
   .portfolio-category .carousel-track img {
     min-width: 300px;
@@ -623,6 +556,22 @@ footer a:hover {
 }
 
 @media (max-width: 768px) {
+  .nav-links, .hero-sub, footer a {
+    display: none;
+  }
+
+  .modal-content {
+    animation: none;
+  }
+
+  .modal-caption {
+    display: none;
+  }
+
+  .close {
+    display: none;
+  }
+
   .portfolio-category .carousel-wrapper {
     gap: 5px;
   }
@@ -644,4 +593,27 @@ footer a:hover {
   .portfolio-category .carousel-track img {
     min-width: 100%;
   }
+}
+
+/* =======================================================
+   ОБЩИЕ СТИЛИ СЕКЦИИ И БЛОКИ
+======================================================= */
+.section-title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  text-align: center;
+  margin: 0 auto 60px;
+}
+
+.portfolio-category {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 220px;
+}
+
+.portfolio-category header h3 {
+  margin: 0 0 10px;
 }
