@@ -617,3 +617,137 @@ footer a:hover {
 .portfolio-category header h3 {
   margin: 0 0 10px;
 }
+
+
+/* ================= MOBILE FIX ================= */
+
+@media (max-width: 768px) {
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 70vh;
+    padding-top: 80px;
+  }
+
+  .hero .container {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+  }
+
+  .sub-title {
+    font-size: 0.95rem;
+  }
+
+  /* ===== NAV ===== */
+  .navbar .container {
+    height: 64px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 50px 0;
+  }
+
+  .services-grid {
+    gap: 20px;
+  }
+
+  .service-card {
+    padding: 28px 20px;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-card {
+    padding: 32px 20px;
+  }
+
+  /* ===== PORTFOLIO CATEGORY ===== */
+  .portfolio-category {
+    margin-bottom: 40px;
+  }
+
+  /* ===== SLIDER ===== */
+  .slider3d {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .viewport {
+    width: 100%;
+    max-width: 340px;
+    height: 220px;
+    perspective: 700px;
+    overflow: visible;
+  }
+
+  .track {
+    height: 100%;
+  }
+
+  .slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 180px;
+    border-radius: 12px;
+  }
+
+  /* кнопки */
+  .nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+  }
+
+  .prev {
+    left: -10px;
+  }
+
+  .next {
+    right: -10px;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-content {
+    max-height: 70vh;
+  }
+
+  .modal-nav {
+    font-size: 34px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  /* .slider3d {
+    max-width: 280px;
+  }
+
+  .viewport {
+    height: 180px;
+  }
+
+  .slide {
+    max-width: 240px;
+  } */
+
+  .portfolio-category header h3 {
+    font-size: 1.2rem;
+  }
+
+}

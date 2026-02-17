@@ -29,8 +29,14 @@ $(document).ready(() => {
         let index = 0, dragStartX = 0, dragDelta = 0, isDragging = false;
         const total = $slides.length;
         const angle = 360 / total;
-        const slideWidth = 460;
-        const radius = slideWidth / (2 * Math.tan(Math.PI / total));
+        const isMobile = window.innerWidth < 768;
+
+        const slideWidth = isMobile ? 180 : 460;
+
+        // уменьшенный радиус для мобилок чтобы не уходило в глубину
+        const radius = isMobile
+            ? slideWidth * 0.9
+            : (slideWidth / (2 * Math.tan(Math.PI / total)));
 
         const wrap = i => (i % total + total) % total;
 
@@ -42,12 +48,21 @@ $(document).ready(() => {
 
                 const rotation = angle * diff;
                 const abs = Math.abs(diff);
-                const scale = Math.max(1 - abs * 0.15, 0.6);
-                const blur = Math.min(abs * 1.5, 6);
-                const opacity = Math.max(1 - abs * 0.2, 0.3);
+                const scale = isMobile
+                    ? Math.max(1 - abs * 0.1, 0.75)
+                    : Math.max(1 - abs * 0.15, 0.6);
+
+                const blur = isMobile
+                    ? Math.min(abs * 1.2, 4)
+                    : Math.min(abs * 1.5, 6);
+
+                const opacity = isMobile
+                    ? Math.max(1 - abs * 0.15, 0.5)
+                    : Math.max(1 - abs * 0.2, 0.3);
+
 
                 $(this).css({
-                    transform: `rotateY(${rotation}deg) translateZ(${radius}px) scale(${scale})`,
+                    transform: isMobile ? `translate(-50%, -50%) rotateY(${rotation}deg) translateZ(${radius}px) scale(${scale}) ` : `rotateY(${rotation}deg) translateZ(${radius}px) scale(${scale})`,
                     filter: `blur(${blur}px)`,
                     opacity
                 });
@@ -62,7 +77,7 @@ $(document).ready(() => {
 
         /* ===== DRAG ===== */
         const startDrag = x => { isDragging = true; dragStartX = x; dragDelta = 0; };
-        const moveDrag = x => { if (!isDragging) return; dragDelta = (x - dragStartX) / 200; updateSlides(dragDelta); };
+        const moveDrag = x => { if (!isDragging) return; dragDelta = (x - dragStartX) / (window.innerWidth < 768 ? 120 : 200); updateSlides(dragDelta); };
         const endDrag = () => {
             if (!isDragging) return;
             isDragging = false;
@@ -109,7 +124,7 @@ $(document).ready(() => {
     $('.modal-next').on('click', e => { e.stopPropagation(); showNext(); });
     $('.modal-prev').on('click', e => { e.stopPropagation(); showPrev(); });
     $('.close').on('click', () => $modal.removeClass('active'));
-    $modal.on('click', e => { if (e.target === this) $modal.removeClass('active'); });
+    $modal.on('click', e => { $modal.removeClass('active'); });
 
     $(document).on('keydown', e => {
         if (!$modal.hasClass('active')) return;
