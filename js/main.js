@@ -197,7 +197,7 @@ $(document).ready(() => {
         });
 
         $.ajax({
-            url: '/submit',
+            url: '/api/submit',
             method: 'POST',
             data: formData,
             processData: false,
