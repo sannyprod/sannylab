@@ -190,7 +190,12 @@ $(document).ready(() => {
     $('.contact-form').on('submit', function (e) {
         e.preventDefault();
 
-        const formData = new FormData(this);
+        const formData = new FormData();
+        formData.append('name', $('#name').val());
+        formData.append('email', $('#email').val());
+        formData.append('phone', $('#phone').val());
+        formData.append('text', $('#text').val());
+        formData.append('consent', $('#consentCheckbox').is(':checked') ? 'on' : '');
 
         $.each(filesArray, function (_, file) {
             formData.append('images', file);
