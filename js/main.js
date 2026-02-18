@@ -132,4 +132,86 @@ $(document).ready(() => {
         if (e.key === 'ArrowRight') showNext();
         if (e.key === 'ArrowLeft') showPrev();
     });
+
+
+    const MAX_FILES = 5;
+    const MAX_SIZE = 20 * 1024 * 1024; // 20MB
+
+    let filesArray = [];
+    let uid = 0;
+
+    $('#images').on('change', function () {
+        const selectedFiles = Array.from(this.files);
+
+        $.each(selectedFiles, function (_, file) {
+
+            if (filesArray.length >= MAX_FILES) {
+                alert('Максимум 5 изображений');
+                return false;
+            }
+
+            if (file.size > MAX_SIZE) {
+                alert(`"${file.name}" больше 20 МБ`);
+                return true;
+            }
+
+            if (!file.type.startsWith('image/')) return true;
+
+            const id = uid++;
+            filesArray.push({ id, file });
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview').append(`
+                    <div class="preview-item" data-id="${id}">
+                        <img src="${e.target.result}">
+                        <button type="button">&times;</button>
+                    </div>
+                `);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        $(this).val('');
+    });
+
+    // удаление без ререндера
+    $('#preview').on('click', 'button', function () {
+        const item = $(this).closest('.preview-item');
+        const id = item.data('id');
+
+        filesArray = filesArray.filter(obj => obj.id !== id);
+
+        item.fadeOut(150, function () {
+            $(this).remove();
+        });
+    });
+
+    $('.contact-form').on('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        $.each(filesArray, function (_, file) {
+            formData.append('images', file);
+        });
+
+        $.ajax({
+            url: '/submit',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (resp) { alert('Отправлено'); },
+            error: function (err) { alert('Ошибка'); }
+        });
+    });
 });
+
+function openConsentModal() {
+    document.getElementById('consentModal').style.display = 'block';
+}
+
+function closeConsentModal() {
+    document.getElementById('consentModal').style.display = 'none';
+}
