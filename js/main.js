@@ -197,8 +197,8 @@ $(document).ready(() => {
         formData.append('text', $('#text').val());
         formData.append('consent', $('#consentCheckbox').is(':checked') ? 'on' : '');
 
-        $.each(filesArray, function (_, file) {
-            formData.append('images', file);
+        $.each(filesArray, function (_, obj) {
+            formData.append('images[]', obj.file);
         });
 
         $.ajax({
