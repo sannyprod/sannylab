@@ -491,7 +491,7 @@ footer a:hover {
 
 .nav {
   position: absolute;
-  top: 40%;
+  top: 60%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.1);
   border: none;
