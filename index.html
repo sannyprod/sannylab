@@ -35,6 +35,7 @@
                 <li><a href="#services">Услуги</a></li>
                 <li><a href="#portfolio">Портфолио</a></li>
                 <li><a href="#about">О нас</a></li>
+                <li><a href="#pricing">Прайс</a></li>
                 <li><a href="#contact" class="btn nav-btn">Связаться</a></li>
             </ul>
         </div>
@@ -249,6 +250,77 @@
         </div>
     </section>
 
+    <!-- Прайс лист -->
+    <section id="pricing" class="price-list">
+        <div class="container">
+            <h2>Пакеты предложений</h2>
+            <div class="price-list-grid">
+                <div class="price-list-card">
+                    <span class="icon">🖼️</span>
+                    <h3>1 изображение</h3>
+                    <h4 class="subtitle">Идеально для первого знакомства с ИИ-фотостудией</h4>
+                    <p class="content">Вы получите одно профессионально обработанное изображение с помощью ИИ: улучшение
+                        качества,
+                        света, цвета и деталей. Отличный вариант для аватарки, резюме или чтобы оценить уровень нашей
+                        работы перед заказом большого пакета.</p>
+                    <p class="who"><b>Подходит для:</b> аватарок, профилей в соцсетях, мессенджеров</p>
+                    <p class="price">Цена: 199 руб.</p>
+                </div>
+                <div class="price-list-card">
+                    <span class="icon">✨</span>
+                    <h3>6 изображений на 1 тему</h3>
+                    <h4 class="subtitle">Мини-фотосессия без камеры и студии</h4>
+                    <p class="content">Мы создадим серию из 6 изображений в едином стиле и теме. Вы получите гармоничный
+                        набор фото для
+                        соцсетей, сайта или личного бренда — без утомительных съемок и ожидания.</p>
+                    <p class="who"><b>Подходит для:</b> Instagram, VK, Telegram, личного бренда</p>
+                    <p class="price">Цена: 899 руб.</p>
+                </div>
+                <div class="price-list-card">
+                    <span class="icon">📸</span>
+                    <h3>15 изображений на 1 тему</h3>
+                    <h4 class="subtitle">Полноценная ИИ-фотосессия</h4>
+                    <p class="content">Большой пакет изображений в одном стиле: разные ракурсы, эмоции и композиции.
+                        Идеально для
+                        праздничных образов, контента на месяц вперед или активного ведения соцсетей.</p>
+                    <p class="who"><b>Подходит для:</b> блогеров, маркетинга, праздничного контента</p>
+                    <p class="price">Цена: 2499 руб.</p>
+                </div>
+                <div class="price-list-card">
+                    <span class="icon">🧩</span>
+                    <h3>15 изображений на 2 темы</h3>
+                    <h4 class="subtitle">Больше разнообразия — больше возможностей</h4>
+                    <p class="content">Вы получаете 15 изображений, разделённых на две разные темы или образа. Например:
+                        деловой стиль +
+                        повседневный, или студийный портрет + креативный образ.</p>
+                    <p class="who"><b>Подходит для:</b> соцсетей, сайта, разных форматов контента</p>
+                    <p class="price">Цена: 2699 руб.</p>
+                </div>
+                <div class="price-list-card">
+                    <span class="icon">🚀</span>
+                    <h3>15 изображений на 3 темы</h3>
+                    <h4 class="subtitle">Максимум вариативности и креатива</h4>
+                    <p class="content">Три разные темы — три уникальных образа. ИИ-фотостудия создаст разнообразный
+                        визуальный контент,
+                        который можно использовать для разных площадок и целей.</p>
+                    <p class="who"><b>Подходит для:</b> блогеров, экспертов, предпринимателей</p>
+                    <p class="price">Цена: 2849 руб.</p>
+                </div>
+                <div class="price-list-card">
+                    <span class="icon">🎯</span>
+                    <h3>Индивидуальный заказ</h3>
+                    <h4 class="subtitle">Когда нужен уникальный результат</h4>
+                    <p class="content">Если у вас есть особая идея, нестандартная тема или нужны изображения под
+                        конкретную задачу —
+                        просто опишите пожелания. Мы подберем оптимальный формат и рассчитаем стоимость индивидуально.
+                    </p>
+                    <p class="who"><b>Подходит для:</b> брендов, рекламы, нестандартных задач</p>
+                    <p class="price">Цена: договорная</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Контакты -->
     <section id="contact" class="contact services">
         <div class="container contact-card">
@@ -257,15 +329,61 @@
                 <input type="text" id="name" placeholder="Ваше имя" required maxlength="64" />
                 <input type="email" id="email" placeholder="Email" required maxlength="64" />
                 <input type="tel" id="phone" placeholder="Номер телефона" name="phone"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+                    pattern="/^\+?[\d\s\-()]{7,20}$/v" required />
+                <input type="text" id="promo" placeholder="Промокод" maxlength="64" />
                 <textarea placeholder="Опишите задумку (стиль, настроение, параметры)..." id="text" rows="4" required
                     maxlength="1024"></textarea>
-                <label class="consent-checkbox">
+
+                <div>
+                    <h4>Пакет предложений:</h4>
+                    <div class="package-options">
+                        <label class="package">
+                            <input type="radio" name="package" value="basic" required>
+                            <span class="radio"></span>
+                            <span class="package-name">1 изображение</span>
+                        </label>
+
+                        <label class="package">
+                            <input type="radio" name="package" value="standard" checked>
+                            <span class="radio"></span>
+                            <span class="package-name">6 изображений на 1 тему</span>
+                        </label>
+
+                        <label class="package">
+                            <input type="radio" name="package" value="premium">
+                            <span class="radio"></span>
+                            <span class="package-name">15 изображений на 1 тему</span>
+                        </label>
+
+                        <label class="package">
+                            <input type="radio" name="package" value="business">
+                            <span class="radio"></span>
+                            <span class="package-name">15 изображений на 2 темы</span>
+                        </label>
+
+                        <label class="package">
+                            <input type="radio" name="package" value="vip">
+                            <span class="radio"></span>
+                            <span class="package-name">15 изображений на 3 темы</span>
+                        </label>
+
+                        <label class="package">
+                            <input type="radio" name="package" value="custom">
+                            <span class="radio"></span>
+                            <span class="package-name">Индивидуальный заказ</span>
+                        </label>
+                    </div>
+                </div>
+
+                <label class="consent">
                     <input type="checkbox" id="consentCheckbox" required>
-                    Я даю согласие на
-                    <a href="#" onclick="openConsentModal(); return false;">
-                        обработку персональных данных
-                    </a>
+                    <span class="checkbox"></span>
+                    <span class="text">
+                        Я даю согласие на
+                        <a href="#" onclick="openConsentModal(); return false;">
+                            обработку персональных данных
+                        </a>
+                    </span>
                 </label>
 
                 <label class="input-file">
@@ -431,6 +549,18 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Loader Modal -->
+    <div id="loader-modal">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Обработка изображения...</p>
+        </div>
+    </div>
+
+    <div id="toast">
+        <span class="toast-text"></span>
     </div>
 
     <script src="js/main.js"></script>

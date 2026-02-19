@@ -1,167 +1,181 @@
-$(document).ready(() => {
+$(function () {
 
-    /* ===== L A Z Y   L O A D ===== */
-    function initLazyImages(context = document) {
-        $(context).find('.lazy-image').each(function () {
+    const $win = $(window);
+    const isMobile = () => window.innerWidth < 768;
+
+    /* ===== LAZY LOAD ===== */
+    function initLazyImages(ctx = document) {
+        $('.lazy-image', ctx).not('.loaded').each(function () {
             const $img = $(this);
-            if ($img.hasClass('loaded')) return;
+            const img = new Image();
 
-            const fullImage = new Image();
-            fullImage.src = $img.data('full');
-
-            fullImage.onload = () => {
-                $img.attr('src', fullImage.src)
+            img.onload = () => {
+                $img.attr('src', img.src)
                     .removeClass('blurred')
                     .addClass('loaded');
             };
+
+            img.src = $img.data('full');
         });
     }
     initLazyImages();
 
-    /* ===== 3D СЛАЙДЕР ===== */
+    /* ===== 3D SLIDER ===== */
     $('.slider3d').each(function () {
+
         const $slider = $(this);
         const $slides = $slider.find('.slide');
         const $viewport = $slider.find('.viewport');
-        const $prevBtn = $slider.find('.prev');
-        const $nextBtn = $slider.find('.next');
 
-        let index = 0, dragStartX = 0, dragDelta = 0, isDragging = false;
+        let index = 0;
+        let dragStartX = 0;
+        let dragDelta = 0;
+        let dragging = false;
+
         const total = $slides.length;
         const angle = 360 / total;
-        const isMobile = window.innerWidth < 768;
 
-        const slideWidth = isMobile ? 180 : 460;
-
-        // уменьшенный радиус для мобилок чтобы не уходило в глубину
-        const radius = isMobile
+        const slideWidth = isMobile() ? 180 : 460;
+        const radius = isMobile()
             ? slideWidth * 0.9
-            : (slideWidth / (2 * Math.tan(Math.PI / total)));
+            : slideWidth / (2 * Math.tan(Math.PI / total));
 
-        const wrap = i => (i % total + total) % total;
+        const wrap = i => (i + total) % total;
 
-        const updateSlides = (offset = 0) => {
+        function update(offset = 0) {
+            const mobile = isMobile();
+
             $slides.each(function (i) {
                 let diff = i - index + offset;
                 if (diff > total / 2) diff -= total;
                 if (diff < -total / 2) diff += total;
 
-                const rotation = angle * diff;
                 const abs = Math.abs(diff);
-                const scale = isMobile
-                    ? Math.max(1 - abs * 0.1, 0.75)
-                    : Math.max(1 - abs * 0.15, 0.6);
-
-                const blur = isMobile
-                    ? Math.min(abs * 1.2, 4)
-                    : Math.min(abs * 1.5, 6);
-
-                const opacity = isMobile
-                    ? Math.max(1 - abs * 0.15, 0.5)
-                    : Math.max(1 - abs * 0.2, 0.3);
-
 
                 $(this).css({
-                    transform: isMobile ? `translate(-50%, -50%) rotateY(${rotation}deg) translateZ(${radius}px) scale(${scale}) ` : `rotateY(${rotation}deg) translateZ(${radius}px) scale(${scale})`,
-                    filter: `blur(${blur}px)`,
-                    opacity
+                    transform: mobile
+                        ? `translate(-50%, -50%) rotateY(${angle * diff}deg) translateZ(${radius}px) scale(${Math.max(1 - abs * 0.1, 0.75)})`
+                        : `rotateY(${angle * diff}deg) translateZ(${radius}px) scale(${Math.max(1 - abs * 0.15, 0.6)})`,
+                    filter: `blur(${Math.min(abs * (mobile ? 1.2 : 1.5), mobile ? 4 : 6)}px)`,
+                    opacity: Math.max(1 - abs * (mobile ? 0.15 : 0.2), mobile ? 0.5 : 0.3)
                 });
             });
-        };
+        }
 
-        const next = () => { index = wrap(index + 1); updateSlides(); };
-        const prev = () => { index = wrap(index - 1); updateSlides(); };
+        const next = () => { index = wrap(index + 1); update(); };
+        const prev = () => { index = wrap(index - 1); update(); };
 
-        $prevBtn.on('click', prev);
-        $nextBtn.on('click', next);
+        $slider.find('.next').on('click', next);
+        $slider.find('.prev').on('click', prev);
 
         /* ===== DRAG ===== */
-        const startDrag = x => { isDragging = true; dragStartX = x; dragDelta = 0; };
-        const moveDrag = x => { if (!isDragging) return; dragDelta = (x - dragStartX) / (window.innerWidth < 768 ? 120 : 200); updateSlides(dragDelta); };
-        const endDrag = () => {
-            if (!isDragging) return;
-            isDragging = false;
+        function start(x) {
+            dragging = true;
+            dragStartX = x;
+            dragDelta = 0;
+        }
+
+        function move(x) {
+            if (!dragging) return;
+            dragDelta = (x - dragStartX) / (isMobile() ? 120 : 200);
+            update(dragDelta);
+        }
+
+        function end() {
+            if (!dragging) return;
+            dragging = false;
+
             if (dragDelta > 0.3) prev();
             else if (dragDelta < -0.3) next();
-            else updateSlides();
-        };
+            else update();
+        }
 
-        $viewport.on('mousedown', e => startDrag(e.clientX));
-        $(window).on('mousemove', e => moveDrag(e.clientX));
-        $(window).on('mouseup', endDrag);
+        $viewport.on('mousedown touchstart', e =>
+            start(e.clientX || e.originalEvent.touches[0].clientX)
+        );
 
-        $viewport.on('touchstart', e => startDrag(e.originalEvent.touches[0].clientX));
-        $(window).on('touchmove', e => moveDrag(e.originalEvent.touches[0].clientX));
-        $(window).on('touchend', endDrag);
+        $win.on('mousemove touchmove', e =>
+            move(e.clientX || e.originalEvent.touches[0].clientX)
+        );
 
-        updateSlides();
+        $win.on('mouseup touchend', end);
+
+        update();
     });
 
-    /* ===== МОДАЛЬНОЕ ОКНО ===== */
-    let currentImages = [], currentIndex = 0;
+    /* ===== MODAL ===== */
     const $modal = $('#modal');
     const $modalImg = $('#modal-img');
     const $caption = $('#caption');
 
-    const openModal = () => {
-        if (!currentImages.length) return;
-        const img = currentImages[currentIndex];
+    let images = [];
+    let current = 0;
+
+    function openModal() {
+        if (!images.length) return;
+        const img = images[current];
         $modal.addClass('active');
         $modalImg.attr('src', img.src);
-        $caption.text(img.alt || "Фотография из портфолио");
-    };
+        $caption.text(img.alt || 'Фотография из портфолио');
+    }
+
+    function nextImg() {
+        current = (current + 1) % images.length;
+        openModal();
+    }
+
+    function prevImg() {
+        current = (current - 1 + images.length) % images.length;
+        openModal();
+    }
 
     $(document).on('click', '.slider3d .slide', function () {
-        const $slider = $(this).closest('.slider3d');
-        currentImages = $slider.find('.slide').toArray();
-        currentIndex = currentImages.indexOf(this);
+        images = $(this).closest('.slider3d').find('.slide').toArray();
+        current = images.indexOf(this);
         openModal();
     });
 
-    const showNext = () => { currentIndex = (currentIndex + 1) % currentImages.length; openModal(); };
-    const showPrev = () => { currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length; openModal(); };
-
-    $('.modal-next').on('click', e => { e.stopPropagation(); showNext(); });
-    $('.modal-prev').on('click', e => { e.stopPropagation(); showPrev(); });
-    $('.close').on('click', () => $modal.removeClass('active'));
-    $modal.on('click', e => { $modal.removeClass('active'); });
+    $('.modal-next').on('click', e => { e.stopPropagation(); nextImg(); });
+    $('.modal-prev').on('click', e => { e.stopPropagation(); prevImg(); });
+    $('.close, #modal').on('click', () => $modal.removeClass('active'));
 
     $(document).on('keydown', e => {
         if (!$modal.hasClass('active')) return;
         if (e.key === 'Escape') $modal.removeClass('active');
-        if (e.key === 'ArrowRight') showNext();
-        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') nextImg();
+        if (e.key === 'ArrowLeft') prevImg();
     });
 
+    /* ===== PHONE MASK ===== */
+    $('#phone').on('input', function () {
+        this.value = this.value.replace(/[^0-9+\-()\s]/g, '');
+    });
 
+    /* ===== FILE UPLOAD ===== */
     const MAX_FILES = 5;
-    const MAX_SIZE = 20 * 1024 * 1024; // 20MB
+    const MAX_SIZE = 20 * 1024 * 1024;
 
-    let filesArray = [];
+    let files = [];
     let uid = 0;
 
     $('#images').on('change', function () {
-        const selectedFiles = Array.from(this.files);
+        [...this.files].some(file => {
 
-        $.each(selectedFiles, function (_, file) {
-
-            if (filesArray.length >= MAX_FILES) {
+            if (files.length >= MAX_FILES) {
                 alert('Максимум 5 изображений');
-                return false;
-            }
-
-            if (file.size > MAX_SIZE) {
-                alert(`"${file.name}" больше 20 МБ`);
                 return true;
             }
 
-            if (!file.type.startsWith('image/')) return true;
+            if (!file.type.startsWith('image/') || file.size > MAX_SIZE) {
+                alert(`"${file.name}" больше 20 МБ`);
+                return false;
+            }
 
             const id = uid++;
-            filesArray.push({ id, file });
+            files.push({ id, file });
 
             const reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = e => {
                 $('#preview').append(`
                     <div class="preview-item" data-id="${id}">
                         <img src="${e.target.result}">
@@ -172,51 +186,65 @@ $(document).ready(() => {
             reader.readAsDataURL(file);
         });
 
-        $(this).val('');
+        this.value = '';
     });
 
-    // удаление без ререндера
     $('#preview').on('click', 'button', function () {
-        const item = $(this).closest('.preview-item');
-        const id = item.data('id');
+        const $item = $(this).closest('.preview-item');
+        const id = $item.data('id');
 
-        filesArray = filesArray.filter(obj => obj.id !== id);
-
-        item.fadeOut(150, function () {
-            $(this).remove();
-        });
+        files = files.filter(f => f.id !== id);
+        $item.fadeOut(150, () => $item.remove());
     });
 
+    /* ===== FORM ===== */
     $('.contact-form').on('submit', function (e) {
         e.preventDefault();
+        showLoader('ИИ обрабатывает изображение...');
 
-        const formData = new FormData();
-        formData.append('name', $('#name').val());
-        formData.append('email', $('#email').val());
-        formData.append('phone', $('#phone').val());
-        formData.append('text', $('#text').val());
-        formData.append('consent', $('#consentCheckbox').is(':checked') ? 'on' : '');
-
-        $.each(filesArray, function (_, obj) {
-            formData.append('images', obj.file);
-        });
+        const formData = new FormData(this);
+        files.forEach(f => formData.append('images', f.file));
 
         $.ajax({
             url: '/api/submit',
             method: 'POST',
             data: formData,
             processData: false,
-            contentType: false,
-            success: function (resp) { alert('Отправлено'); },
-            error: function (err) { alert('Ошибка'); }
-        });
+            contentType: false
+        })
+            .done(() => showToast('Данные успешно отправлены.', 'success'))
+            .fail(() => showToast('Ошибка отправки. Напишите в Telegram @Sannyprod', 'error'))
+            .always(hideLoader);
     });
+
+    /* ===== UI ===== */
+    function showLoader(text) {
+        $('#loader-modal p').text(text).parent().fadeIn(200);
+    }
+
+    function hideLoader() {
+        $('#loader-modal').fadeOut(200);
+    }
+
+    let toastTimer;
+    function showToast(msg, type = 'info', time = 5000) {
+        const $toast = $('#toast');
+        clearTimeout(toastTimer);
+
+        $toast.removeClass('success error info show')
+            .find('.toast-text').text(msg);
+
+        requestAnimationFrame(() => $toast.addClass(type).addClass('show'));
+        toastTimer = setTimeout(() => $toast.removeClass('show'), time);
+    }
+
+    $('#toast').on('click', () => $('#toast').removeClass('show'));
 });
 
+/* ===== CONSENT ===== */
 function openConsentModal() {
-    document.getElementById('consentModal').style.display = 'block';
+    $('#consentModal').show();
 }
-
 function closeConsentModal() {
-    document.getElementById('consentModal').style.display = 'none';
+    $('#consentModal').hide();
 }
