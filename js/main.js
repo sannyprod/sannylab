@@ -205,6 +205,10 @@ $(function () {
         const formData = new FormData(this);
         files.forEach(f => formData.append('images', f.file));
 
+        for (const [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+
         $.ajax({
             url: '/api/submit',
             method: 'POST',
@@ -247,4 +251,12 @@ function openConsentModal() {
 }
 function closeConsentModal() {
     $('#consentModal').hide();
+}
+
+/* ===== OFFER ===== */
+function openOfferModal() {
+    $('#offerModal').show();
+}
+function closeOfferModal() {
+    $('#offerModal').hide();
 }
