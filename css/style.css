@@ -95,9 +95,18 @@ a {
 }
 
 .logo {
-  font-size: 1.4rem;
-  color: white;
-  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* расстояние между иконкой и текстом */
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 32px;
+  /* можно 20–28px под стиль сайта */
+  height: 32px;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -347,6 +356,7 @@ input:focus, textarea:focus {
 footer {
   text-align: center;
   padding: 32px 0;
+  padding-top: 0;
   color: #a1a5b0;
 }
 
@@ -958,10 +968,24 @@ footer a:hover {
     margin-bottom: 16px;
   }
 
-  .price {
+  .price-block {
     margin-top: auto;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+
+    .old-price {
+      font-weight: bold;
+      /* color: #b91c1c; */
+
+      .old-price__cost {
+        font-style: italic;
+        text-decoration: line-through;
+      }
+    }
+
+    .price {
+      color: #419152;
+      font-size: 18px;
+    }
   }
 }
 
@@ -1318,4 +1342,26 @@ OFFER MODAL
     padding: 8px 24px;
     font-size: 16px;
   }
+}
+
+.social-media {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  .social-media_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    .icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 0;
+    }
+  }
+
 }

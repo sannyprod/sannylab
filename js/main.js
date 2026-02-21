@@ -216,9 +216,14 @@ $(function () {
             processData: false,
             contentType: false
         })
-            .done(() => showToast('Данные успешно отправлены.', 'success'))
-            .fail(() => showToast('Ошибка отправки. Напишите в Telegram @Sannyprod', 'error'))
-            .always(hideLoader);
+            .done(() => {
+                hideLoader();
+                showToast('Данные успешно отправлены.', 'success');
+            })
+            .fail(() => {
+                hideLoader();
+                showToast('Ошибка отправки. Напишите в Telegram @Sannyprod', 'error');
+            })
     });
 
     /* ===== UI ===== */
